@@ -6,7 +6,7 @@ namespace AbstractFactory
     {
         static void Main(string[] args)
         {
-            CustomerManager customerManager = new CustomerManager(new Factoryo());
+            CustomerManager customerManager = new CustomerManager(new FactoryOther());
             customerManager.GetAll();
             Console.ReadLine();
         }
