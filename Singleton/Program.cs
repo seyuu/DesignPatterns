@@ -13,8 +13,8 @@ namespace Singleton
 
     class CustomerManager
     {
-        private static CustomerManager _customerManager;
-        static object _lockedObject = new object();
+        private static CustomerManager _customerManager; // dış erişime engelle
+        static object _lockedObject = new object(); //thread safe
 
         private CustomerManager()
         {
@@ -23,12 +23,11 @@ namespace Singleton
 
         public static CustomerManager CreateAsSingleton()
         {
-            lock (_lockedObject)
+            //nesne örneğini aynı anda üretilmesinin önüne geçmek için bunu kullanıyoruz.
+            lock (_lockedObject) 
             {
-                if (_customerManager == null)
-                {
-                    _customerManager = new CustomerManager();
-                }
+                //_customerManager ?? (_customerManager = new CustomerManager());
+                _customerManager ??= new CustomerManager();
             }
 
             return _customerManager;
